@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     /* Base / layout */
-    html, body {
+    html {
+      margin: 0;
+      padding: 0;
       height: 100%;
     }
 
@@ -25,13 +27,16 @@
       overflow-x: hidden;
     }
 
-    body::before {
+    body::before,
+    body::after {
       content: "";
-      position: absolute;
+      position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 0;
+    }
 
+    body::before {
       background-image:
         radial-gradient(1px 1px at 10% 10%, #fff, rgba(255,255,255,0)),
         radial-gradient(1px 1px at 20% 30%, #fff, rgba(255,255,255,0)),
@@ -43,29 +48,23 @@
         radial-gradient(1px 1px at 15% 80%, #fff, rgba(255,255,255,0)),
         radial-gradient(1px 1px at 45% 90%, #fff, rgba(255,255,255,0)),
         radial-gradient(1px 1px at 75% 85%, #fff, rgba(255,255,255,0));
-      background-size: 300px 300px;
+      background-size: 200px 200px;
       background-repeat: repeat;
       opacity: 0.7;
 
-      animation: twinkle 3s ease-in-out infinite;
+      animation: twinkle 6s ease-in-out infinite;
     }
 
     body::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-
       background-image:
         radial-gradient(1.5px 1.5px at 25% 25%, #fff, rgba(255,255,255,0)),
         radial-gradient(1.5px 1.5px at 55% 35%, #fff, rgba(255,255,255,0)),
         radial-gradient(1.5px 1.5px at 85% 55%, #fff, rgba(255,255,255,0)),
         radial-gradient(1.5px 1.5px at 35% 75%, #fff, rgba(255,255,255,0)),
         radial-gradient(1.5px 1.5px at 65% 15%, #fff, rgba(255,255,255,0));
-      background-size: 400px 400px;
+      background-size: 300px 300px;
       background-repeat: repeat;
-      opacity: 0.4;
+      opacity: 0.5;
 
       animation: twinkle 8s ease-in-out infinite reverse;
     }
