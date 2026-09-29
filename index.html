@@ -14,19 +14,17 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       margin: 0;
       padding: 0;
-      color: #f0f4ff; /* bright text */
+      color: #f0f4ff;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
 
-      /* Dark night sky background */
       background: radial-gradient(ellipse at bottom, #0b1026 0%, #020205 100%);
       position: relative;
       overflow-x: hidden;
     }
 
-    /* Stars layer */
     body::before {
       content: "";
       position: absolute;
@@ -34,7 +32,6 @@
       pointer-events: none;
       z-index: 0;
 
-      /* Many small white dots as stars */
       background-image:
         radial-gradient(1px 1px at 10% 10%, #fff, rgba(255,255,255,0)),
         radial-gradient(1px 1px at 20% 30%, #fff, rgba(255,255,255,0)),
@@ -53,7 +50,6 @@
       animation: twinkle 6s ease-in-out infinite;
     }
 
-    /* Slightly larger / brighter stars */
     body::after {
       content: "";
       position: absolute;
@@ -74,7 +70,6 @@
       animation: twinkle 8s ease-in-out infinite reverse;
     }
 
-    /* Twinkle animation */
     @keyframes twinkle {
       0%, 100% {
         opacity: 0.45;
@@ -127,7 +122,7 @@
       font-size: 1.05rem;
       line-height: 1.6;
       margin-top: 1.5rem;
-      color: #eaf0ff; /* bright, slightly blueish white */
+      color: #eaf0ff;
       text-shadow: 0 0 6px rgba(255, 255, 255, 0.35);
     }
 
@@ -135,10 +130,82 @@
       margin-top: auto;
       padding: 1rem;
       font-size: 0.85rem;
-      color: #cfd6ff; /* bright gray-blue */
+      color: #cfd6ff;
       text-align: center;
       position: relative;
       z-index: 1;
+    }
+
+    /* Login form styles */
+    .login-box {
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 1.5rem 1.25rem;
+      margin: 2rem auto 0;
+      max-width: 360px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    .login-box h2 {
+      margin: 0 0 1rem;
+      font-size: 1.4rem;
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    }
+
+    .login-box label {
+      display: block;
+      text-align: left;
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+      color: #eaf0ff;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 0.6rem 0.7rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.08);
+      color: #f0f4ff;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .login-box input::placeholder {
+      color: #cfd6ff;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #4f6dff, #8a5cff);
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(79, 109, 255, 0.35);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .login-box button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(79, 109, 255, 0.45);
+    }
+
+    .login-box button:active {
+      transform: translateY(0);
+    }
+
+    .error {
+      color: #ffb3b3;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      text-shadow: 0 0 4px rgba(255, 179, 179, 0.5);
     }
   </style>
 </head>
@@ -148,7 +215,6 @@
   </header>
 
   <main>
-    <!-- The Garden of Eden by Thomas Cole (1828) -->
     <img
       src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Thomas_Cole_-_The_Garden_of_Eden_%281828%29.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"
       alt="The Garden of Eden by Thomas Cole (1828)"
@@ -156,10 +222,107 @@
     <p>
       Back to where we came from to our original
     </p>
+
+    <!-- Login form -->
+    <div class="login-box">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter your username"
+          required
+        >
+
+        <label for="password">Password</label>
+
+        <div class="password-container">
+        	 <input
+         	type="password"
+    			id="password"
+    			name="password"
+    			placeholder="Enter your password"
+    			required
+  		  	 >	
+
+  		  	 <button
+            type="button"
+            id="togglePassword"
+            aria-label="Show password"
+        	 >
+    			👁️ view password
+  			 </button>
+		  </div>
+
+		  <script>
+          const passwordInput = document.getElementById("password");
+          const toggleButton = document.getElementById("togglePassword");
+
+          toggleButton.addEventListener("click", () => {
+            const isPasswordHidden = passwordInput.type === "password";
+
+            passwordInput.type = isPasswordHidden ? "text" : "password";
+            toggleButton.textContent = isPasswordHidden ? "🙈" : "👁️";
+            toggleButton.setAttribute(
+              "aria-label",
+              isPasswordHidden ? "Hide password" : "Show password"
+            );
+          });
+        </script>
+
+
+        <button type="submit">Log in</button>
+        <div id="errorMsg" class="error"></div>
+      </form>
+    </div>
   </main>
 
   <footer>
-    Let the journy begin today with your fund
+    Let the journey begin today with your funds
   </footer>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const errorEl = document.getElementById('errorMsg');
+
+      errorEl.textContent = '';
+
+      if (!username || !password) {
+        errorEl.textContent = 'Please enter both username and password.';
+        return;
+      }
+
+      try {
+        // Load users from the separate JSON file
+        const res = await fetch('users.json');
+        if (!res.ok) {
+          throw new Error('Failed to load users');
+        }
+        const users = await res.json();
+
+        // Find a matching user
+        const user = users.find(
+          u => u.username === username && u.password === password
+        );
+
+        if (!user) {
+          errorEl.textContent = 'Invalid username or password.';
+          return;
+        }
+
+        // Correct credentials: redirect
+        window.location.href = 'info.html';
+      } catch (err) {
+        console.error(err);
+        errorEl.textContent = 'Something went wrong. Please try again later.';
+      }
+    });
+  </script>
 </body>
 </html>
